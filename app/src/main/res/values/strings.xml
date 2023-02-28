@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ProyectoA_PMDM_T2_JunZhou</string>
+    <string name="str_listado">Listado</string>
+    <string name="str_mapa">Mapa</string>
 </resources>
