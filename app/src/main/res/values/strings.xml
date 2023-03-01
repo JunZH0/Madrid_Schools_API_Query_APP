@@ -2,4 +2,8 @@
     <string name="app_name">ProyectoA_PMDM_T2_JunZhou</string>
     <string name="str_listado">Listado</string>
     <string name="str_mapa">Mapa</string>
+    <string name="strTitulo">Buscador de ... de La Comunidad de Madrid</string>
+    <string name="strBtnFiltro">SELECCIONAR FILTRO</string>
+    <string name="strBtnConsulta">CONSULTAR LISTADO</string>
+    <string name="strPlaceholder">Placeholder</string>
 </resources>
