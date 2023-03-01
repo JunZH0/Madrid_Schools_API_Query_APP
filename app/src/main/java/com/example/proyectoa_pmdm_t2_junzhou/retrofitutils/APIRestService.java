@@ -6,5 +6,4 @@ public interface APIRestService {
     public static final String BASE_URL = "https://datos.madrid.es/";
 
 
-
 }
