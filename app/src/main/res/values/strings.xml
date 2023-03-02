@@ -6,4 +6,7 @@
     <string name="strBtnFiltro">SELECCIONAR FILTRO</string>
     <string name="strBtnConsulta">CONSULTAR LISTADO</string>
     <string name="strPlaceholder">Placeholder</string>
+    <string name="hintLat">Latitud</string>
+    <string name="hintLong">Longitud</string>
+    <string name="hintDist">Distancia en metros</string>
 </resources>

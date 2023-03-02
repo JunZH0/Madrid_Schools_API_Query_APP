@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.proyectoa_pmdm_t2_junzhou.retrofitutils.APIRestService;
 import com.example.proyectoa_pmdm_t2_junzhou.retrofitutils.RetrofitClient;
@@ -13,7 +15,7 @@ import com.example.proyectoa_pmdm_t2_junzhou.retrofitutils.RetrofitClient;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     TextView tvTitulo;
     TextView tvFiltro;
@@ -35,8 +37,10 @@ public class MainActivity extends AppCompatActivity {
         btnConsultar = findViewById(R.id.btn_consulta);
         btnFiltro = findViewById(R.id.btn_filtro);
 
-        initRetrofit();
+        btnConsultar.setOnClickListener((View.OnClickListener) this);
+        btnFiltro.setOnClickListener((View.OnClickListener) this);
 
+        initRetrofit();
 
     }
 
@@ -50,5 +54,15 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    public void onClick(View v) {
+        if (v.getId() == R.id.btn_consulta) {
+           //TODO 10/12/2020  hacer la consulta a la API
+        } else if (v.getId() == R.id.btn_filtro) {
+            FilterDialog fd = new FilterDialog();
+            fd.show(getSupportFragmentManager(), "Filtro");
+
+        }
     }
 }
