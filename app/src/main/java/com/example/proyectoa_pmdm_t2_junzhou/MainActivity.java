@@ -1,6 +1,8 @@
 package com.example.proyectoa_pmdm_t2_junzhou;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.proyectoa_pmdm_t2_junzhou.fragment.ListadoFragment;
 import com.example.proyectoa_pmdm_t2_junzhou.retrofitutils.APIRestService;
 import com.example.proyectoa_pmdm_t2_junzhou.retrofitutils.RetrofitClient;
 
@@ -63,12 +66,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         if (v.getId() == R.id.btn_consulta) {
            //TODO 10/12/2020  hacer la consulta a la API
-            onDatosListener(lat, lon, dist);
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.replace(R.id.frameLayout, new ListadoFragment());
+            ft.commit();
+            consultarDatos();
         } else if (v.getId() == R.id.btn_filtro) {
             FilterDialog fd = new FilterDialog();
             fd.show(getSupportFragmentManager(), "Filtro");
 
         }
+    }
+
+    private void consultarDatos() {
+
+
+
     }
 
     public void onDatosListener(Double lat, Double lon, Double dist) {
