@@ -2,10 +2,12 @@ package com.example.proyectoa_pmdm_t2_junzhou;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
@@ -15,6 +17,8 @@ public class FilterDialog extends DialogFragment {
     EditText etLat;
     EditText etLon;
     EditText etDist;
+
+    OnDatosListener listener;
 
 
     @NonNull
@@ -36,7 +40,15 @@ public class FilterDialog extends DialogFragment {
                 String lat = etLat.getText().toString();
                 String lon = etLon.getText().toString();
                 String dist = etDist.getText().toString();
-                // TODO: 10/12/2020  pasar los datos a la actividad principal
+
+                if (lat.isEmpty() || lon.isEmpty() || dist.isEmpty()) {
+                    dialog.cancel();
+                    Toast.makeText(getActivity(), "No puede haber campos vacíos", Toast.LENGTH_SHORT).show();
+                } else {
+                    if(listener != null) {
+                        listener.onDatosListener(Double.parseDouble(lat), Double.parseDouble(lon), Double.parseDouble(dist));
+                    }
+                }
 
             }
         } ).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -46,5 +58,23 @@ public class FilterDialog extends DialogFragment {
             }
         });
         return builder.create();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            listener = (OnDatosListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement OnDatosListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        if (listener != null) {
+            listener = null;
+        }
+        super.onDetach();
     }
 }

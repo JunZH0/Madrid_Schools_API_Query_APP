@@ -15,7 +15,7 @@ import com.example.proyectoa_pmdm_t2_junzhou.retrofitutils.RetrofitClient;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, OnDatosListener{
 
     TextView tvTitulo;
     TextView tvFiltro;
@@ -24,6 +24,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnConsultar;
     Button btnFiltro;
 
+    Double lat;
+    Double lon;
+    Double dist;
+    OnDatosListener listener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,10 +63,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         if (v.getId() == R.id.btn_consulta) {
            //TODO 10/12/2020  hacer la consulta a la API
+            onDatosListener(lat, lon, dist);
         } else if (v.getId() == R.id.btn_filtro) {
             FilterDialog fd = new FilterDialog();
             fd.show(getSupportFragmentManager(), "Filtro");
 
         }
+    }
+
+    public void onDatosListener(Double lat, Double lon, Double dist) {
+
+        this.lat = lat;
+        this.lon = lon;
+        this.dist = dist;
+        tvFiltro.setText("Latitud: " + lat);
+        tvFiltro2.setText("Longitud: " + lon);
+        tvFiltro3.setText("Distancia: " + dist);
     }
 }
