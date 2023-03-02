@@ -46,7 +46,7 @@ public class FilterDialog extends DialogFragment {
                     Toast.makeText(getActivity(), "No puede haber campos vacíos", Toast.LENGTH_SHORT).show();
                 } else {
                     if(listener != null) {
-                        listener.onDatosListener(Double.parseDouble(lat), Double.parseDouble(lon), Double.parseDouble(dist));
+                        listener.onDatosListener(Double.parseDouble(lat), Double.parseDouble(lon), Integer.parseInt(dist));
                     }
                 }
 

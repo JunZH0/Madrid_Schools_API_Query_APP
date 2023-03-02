@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.proyectoa_pmdm_t2_junzhou.fragment.ListadoFragment;
+import com.example.proyectoa_pmdm_t2_junzhou.retrofidata.DatosCentro;
 import com.example.proyectoa_pmdm_t2_junzhou.retrofitutils.APIRestService;
 import com.example.proyectoa_pmdm_t2_junzhou.retrofitutils.RetrofitClient;
 
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     Double lat;
     Double lon;
-    Double dist;
+    int dist;
     OnDatosListener listener;
 
     @Override
@@ -65,12 +66,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void onClick(View v) {
         if (v.getId() == R.id.btn_consulta) {
-           //TODO 10/12/2020  hacer la consulta a la API
-            FragmentManager fm = getSupportFragmentManager();
-            FragmentTransaction ft = fm.beginTransaction();
-            ft.replace(R.id.frameLayout, new ListadoFragment());
-            ft.commit();
             consultarDatos();
+            // TODO Mostrar los datos en el fragment
+
+
         } else if (v.getId() == R.id.btn_filtro) {
             FilterDialog fd = new FilterDialog();
             fd.show(getSupportFragmentManager(), "Filtro");
@@ -79,12 +78,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void consultarDatos() {
+        Retrofit retrofit = RetrofitClient.getClient(APIRestService.BASE_URL);
+        APIRestService ars = retrofit.create(APIRestService.class);
+        // TODO Obtener los datos con el resto de parámetros
+        Call<DatosCentro> call = ars.getData();
+        call.enqueue(new retrofit2.Callback<DatosCentro>() {
+            @Override
+            public void onResponse(Call<DatosCentro> call, retrofit2.Response<DatosCentro> response) {
+                if (response.isSuccessful()) {
+                    String datosCentro = response.body().toString();
+                    Toast.makeText(MainActivity.this, "Datos obtenidos correctamente", Toast.LENGTH_SHORT).show();
+                    System.out.println(datosCentro);
+                } else {
+                    Toast.makeText(MainActivity.this, "Error al obtener los datos", Toast.LENGTH_SHORT).show();
+                }
+            }
 
+            @Override
+            public void onFailure(Call<DatosCentro> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Error al obtener los datos", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
     }
 
-    public void onDatosListener(Double lat, Double lon, Double dist) {
+    public void onDatosListener(Double lat, Double lon, int dist) {
 
         this.lat = lat;
         this.lon = lon;
@@ -93,4 +112,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvFiltro2.setText("Longitud: " + lon);
         tvFiltro3.setText("Distancia: " + dist);
     }
+
+
 }

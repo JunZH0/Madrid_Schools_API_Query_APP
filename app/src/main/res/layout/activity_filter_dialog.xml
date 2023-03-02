@@ -42,7 +42,7 @@
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:hint="@string/hintDist"
-        android:inputType="numberDecimal"
+        android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etLon" />

@@ -30,15 +30,7 @@ public class ListadoFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ListadoFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+
     public static ListadoFragment newInstance(String param1, String param2) {
         ListadoFragment fragment = new ListadoFragment();
         Bundle args = new Bundle();
@@ -48,13 +40,11 @@ public class ListadoFragment extends Fragment {
         return fragment;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public View onCreate(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        // Inflate the recycler view for this fragment
+        return inflater.inflate(R.layout.fragment_listado, container, false);
+
     }
 
     @Override

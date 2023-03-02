@@ -13,7 +13,7 @@ public interface APIRestService {
 
     // Utilizar BASE_URL + parte variable para obtener los datos de la API
     @GET("203166-0-universidades-educacion.json")
-    Call<DatosCentro> getData(@Query("latitud") double lat,
+    Call<DatosCentro> getDataFilter(@Query("latitud") double lat,
                                   @Query("longitud") double lon,
                                   @Query("distancia") int dist);
 
