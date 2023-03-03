@@ -1,33 +1,42 @@
 package com.example.proyectoa_pmdm_t2_junzhou.retrofidata;
 
-//import javax.annotation.Generated;
+
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-//@Generated("jsonschema2pojo")
+
 public class Address {
 
+    @SerializedName("district")
+    @Expose
+    private District district;
     @SerializedName("area")
     @Expose
-    private String area;
+    private Area area;
     @SerializedName("locality")
     @Expose
     private String locality;
-    @SerializedName("district")
-    @Expose
-    private String district;
-    @SerializedName("street-address")
-    @Expose
-    private String streetAddress;
     @SerializedName("postal-code")
     @Expose
     private String postalCode;
+    @SerializedName("street-address")
+    @Expose
+    private String streetAddress;
 
-    public String getArea() {
+    public District getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(District district) {
+        this.district = district;
+    }
+
+    public Area getArea() {
         return area;
     }
 
-    public void setArea(String area) {
+    public void setArea(Area area) {
         this.area = area;
     }
 
@@ -39,12 +48,12 @@ public class Address {
         this.locality = locality;
     }
 
-    public String getDistrict() {
-        return district;
+    public String getPostalCode() {
+        return postalCode;
     }
 
-    public void setDistrict(String district) {
-        this.district = district;
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
     }
 
     public String getStreetAddress() {
@@ -53,14 +62,6 @@ public class Address {
 
     public void setStreetAddress(String streetAddress) {
         this.streetAddress = streetAddress;
-    }
-
-    public String getPostalCode() {
-        return postalCode;
-    }
-
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
     }
 
 }

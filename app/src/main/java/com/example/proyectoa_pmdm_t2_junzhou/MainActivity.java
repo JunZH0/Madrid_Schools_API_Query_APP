@@ -1,8 +1,6 @@
 package com.example.proyectoa_pmdm_t2_junzhou;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,8 +9,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.proyectoa_pmdm_t2_junzhou.fragment.ListadoFragment;
-import com.example.proyectoa_pmdm_t2_junzhou.retrofidata.DatosCentro;
 import com.example.proyectoa_pmdm_t2_junzhou.retrofitutils.APIRestService;
 import com.example.proyectoa_pmdm_t2_junzhou.retrofitutils.RetrofitClient;
 
@@ -81,8 +77,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Retrofit retrofit = RetrofitClient.getClient(APIRestService.BASE_URL);
         APIRestService ars = retrofit.create(APIRestService.class);
         // TODO Obtener los datos con el resto de parámetros
-        Call<DatosCentro> call = ars.getData();
-        call.enqueue(new retrofit2.Callback<DatosCentro>() {
+          /*Call<DatosCentro> call = ars.getData();
+      call.enqueue(new retrofit2.Callback<DatosCentro>() {
             @Override
             public void onResponse(Call<DatosCentro> call, retrofit2.Response<DatosCentro> response) {
                 if (response.isSuccessful()) {
@@ -98,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onFailure(Call<DatosCentro> call, Throwable t) {
                 Toast.makeText(MainActivity.this, "Error al obtener los datos", Toast.LENGTH_SHORT).show();
             }
-        });
+        }); */
 
 
     }
@@ -108,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         this.lat = lat;
         this.lon = lon;
         this.dist = dist;
+        // Texto Harcodeado
         tvFiltro.setText("Latitud: " + lat);
         tvFiltro2.setText("Longitud: " + lon);
         tvFiltro3.setText("Distancia: " + dist);

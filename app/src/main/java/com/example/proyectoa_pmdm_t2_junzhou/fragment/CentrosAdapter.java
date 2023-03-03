@@ -9,15 +9,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.proyectoa_pmdm_t2_junzhou.R;
-import com.example.proyectoa_pmdm_t2_junzhou.retrofidata.DatosCentro;
+import com.example.proyectoa_pmdm_t2_junzhou.retrofidata.CentrosRes;
 
 import java.util.List;
 
 public class CentrosAdapter extends RecyclerView.Adapter<CentrosAdapter.CentroViewHolder>{
 
-    private List<DatosCentro> centrosList;
+    private List<CentrosRes> centrosList;
 
-    public CentrosAdapter(List<DatosCentro> centrosList) {
+    public CentrosAdapter(List<CentrosRes> centrosList) {
         this.centrosList = centrosList;
     }
 
@@ -33,8 +33,8 @@ public class CentrosAdapter extends RecyclerView.Adapter<CentrosAdapter.CentroVi
 
     @Override
     public void onBindViewHolder(@NonNull CentrosAdapter.CentroViewHolder holder, int position) {
-        DatosCentro centro = centrosList.get(position);
-        holder.tvNombre.setText(centro.getTitle());
+        CentrosRes centro = centrosList.get(position);
+        //holder.tvNombre.setText(centro.get);
     }
 
 
