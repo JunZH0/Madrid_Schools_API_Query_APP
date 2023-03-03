@@ -42,23 +42,20 @@ public class FilterDialog extends DialogFragment {
             @Override
             public void onShow(DialogInterface dialogInterface) {
                 Button button = ((AlertDialog) dialogInterface).getButton(AlertDialog.BUTTON_POSITIVE);
-                button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        String lat = etLat.getText().toString();
-                        String lon = etLon.getText().toString();
-                        String dist = etDist.getText().toString();
+                button.setOnClickListener(view -> {
+                    String lat = etLat.getText().toString();
+                    String lon = etLon.getText().toString();
+                    String dist = etDist.getText().toString();
 
-                        if (lat.isEmpty() || lon.isEmpty() || dist.isEmpty()) {
-                            // Show a message to the user that there are empty fields
-                            Toast.makeText(getActivity(), "No puede haber campos vacíos", Toast.LENGTH_SHORT).show();
-                        } else {
-                            // Call the listener only if there is data
-                            if (listener != null) {
-                                listener.onDatosListener(Double.parseDouble(lat), Double.parseDouble(lon), Integer.parseInt(dist));
-                            }
-                            dialog.dismiss();
+                    if (lat.isEmpty() || lon.isEmpty() || dist.isEmpty()) {
+
+                        Toast.makeText(getActivity(), "No puede haber campos vacíos", Toast.LENGTH_SHORT).show();
+                    } else {
+
+                        if (listener != null) {
+                            listener.onDatosListener(Double.parseDouble(lat), Double.parseDouble(lon), Integer.parseInt(dist));
                         }
+                        dialog.dismiss();
                     }
                 });
             }

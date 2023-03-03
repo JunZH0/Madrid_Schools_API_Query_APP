@@ -91,9 +91,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         this.lon = lon;
         this.dist = dist;
 
-        tvFiltro.setText(getString(R.string.latitud, lat));
-        tvFiltro2.setText(getString(R.string.longitud, lon));
-        tvFiltro3.setText(getString(R.string.distancia, dist));
+        String latitud = getString(R.string.latitud);
+        String longitud = getString(R.string.longitud);
+        String distancia = getString(R.string.distancia);
+
+        tvFiltro.setText(getString(R.string.filtro, latitud, String.valueOf(lat)));
+        tvFiltro2.setText(getString(R.string.filtro, longitud, String.valueOf(lon)));
+        tvFiltro3.setText(getString(R.string.filtro, distancia, String.valueOf(dist)));
+
 
     }
 

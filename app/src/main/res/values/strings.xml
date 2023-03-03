@@ -9,8 +9,9 @@
     <string name="hintLat">Latitud</string>
     <string name="hintLong">Longitud</string>
     <string name="hintDist">Distancia en metros</string>
-    <string name="latitud">Latitud: %1$f</string>
-    <string name="longitud">Longitud: %1$f</string>
-    <string name="distancia">Distancia: %1$.2f km</string>
+    <string name="latitud">Latitud: </string>
+    <string name="longitud">Longitud: </string>
+    <string name="distancia">Distancia: </string>
+    <string name="filtro">%1$s: %2$s</string>
 
 </resources>
