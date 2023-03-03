@@ -34,6 +34,7 @@ public class FilterDialog extends DialogFragment {
 
 
 
+        // TODO onShowListener para que no se pueda cerrar el dialogo hasta que se rellenen todos los campos
         builder.setTitle("Seleccionar filtro").setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

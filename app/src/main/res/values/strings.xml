@@ -2,13 +2,15 @@
     <string name="app_name">Centros Educativos Madrid</string>
     <string name="str_listado">Listado</string>
     <string name="str_mapa">Mapa</string>
-    <string name="strTitulo">Buscador de ... de La Comunidad de Madrid</string>
+    <string name="strTitulo">Buscador de Escuelas de La Comunidad de Madrid</string>
     <string name="strBtnFiltro">SELECCIONAR FILTRO</string>
     <string name="strBtnConsulta">CONSULTAR LISTADO</string>
     <string name="strPlaceholder">Placeholder</string>
     <string name="hintLat">Latitud</string>
     <string name="hintLong">Longitud</string>
     <string name="hintDist">Distancia en metros</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="latitud">Latitud: %1$f</string>
+    <string name="longitud">Longitud: %1$f</string>
+    <string name="distancia">Distancia: %1$.2f km</string>
+
 </resources>

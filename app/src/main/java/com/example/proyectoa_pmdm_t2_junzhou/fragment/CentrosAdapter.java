@@ -9,15 +9,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.proyectoa_pmdm_t2_junzhou.R;
-import com.example.proyectoa_pmdm_t2_junzhou.retrofidata.CentrosRes;
+import com.example.proyectoa_pmdm_t2_junzhou.retrofidata.Graph;
 
-import java.util.List;
+import java.util.ArrayList;
+
 
 public class CentrosAdapter extends RecyclerView.Adapter<CentrosAdapter.CentroViewHolder>{
 
-    private List<CentrosRes> centrosList;
+    private ArrayList<Graph> centrosList;
 
-    public CentrosAdapter(List<CentrosRes> centrosList) {
+    public CentrosAdapter(ArrayList<Graph> centrosList) {
         this.centrosList = centrosList;
     }
 
@@ -33,15 +34,16 @@ public class CentrosAdapter extends RecyclerView.Adapter<CentrosAdapter.CentroVi
 
     @Override
     public void onBindViewHolder(@NonNull CentrosAdapter.CentroViewHolder holder, int position) {
-        CentrosRes centro = centrosList.get(position);
-        //holder.tvNombre.setText(centro.get);
+       Graph graph = centrosList.get(position);
+       // cambia el valor de los textview al valor recogido por getTitle
+       holder.getTvNombre().setText(graph.getTitle());
     }
 
 
 
     @Override
     public int getItemCount() {
-        return 0;
+        return centrosList.size();
     }
 
     public static class CentroViewHolder extends RecyclerView.ViewHolder {
@@ -50,6 +52,10 @@ public class CentrosAdapter extends RecyclerView.Adapter<CentrosAdapter.CentroVi
         public CentroViewHolder(View itemView) {
             super(itemView);
             tvNombre = itemView.findViewById(R.id.tvItem);
+        }
+
+        public TextView getTvNombre() {
+            return tvNombre;
         }
     }
 }

@@ -1,6 +1,8 @@
 package com.example.proyectoa_pmdm_t2_junzhou;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,6 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.proyectoa_pmdm_t2_junzhou.fragment.ListadoFragment;
+import com.example.proyectoa_pmdm_t2_junzhou.retrofidata.CentrosRes;
 import com.example.proyectoa_pmdm_t2_junzhou.retrofitutils.APIRestService;
 import com.example.proyectoa_pmdm_t2_junzhou.retrofitutils.RetrofitClient;
 
@@ -28,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Double lon;
     int dist;
     OnDatosListener listener;
+    private FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvFiltro3 = findViewById(R.id.tvFiltro3);
         btnConsultar = findViewById(R.id.btn_consulta);
         btnFiltro = findViewById(R.id.btn_filtro);
+
+        fragmentManager = getSupportFragmentManager();
 
         btnConsultar.setOnClickListener((View.OnClickListener) this);
         btnFiltro.setOnClickListener((View.OnClickListener) this);
@@ -62,9 +69,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void onClick(View v) {
         if (v.getId() == R.id.btn_consulta) {
-            consultarDatos();
-            // TODO Mostrar los datos en el fragment
 
+            ListadoFragment lf = new ListadoFragment();
+            FragmentTransaction ft = fragmentManager.beginTransaction();
+            ft.replace(R.id.frameLayout, lf);
+            ft.addToBackStack(null);
+            ft.commit();
 
         } else if (v.getId() == R.id.btn_filtro) {
             FilterDialog fd = new FilterDialog();
@@ -73,41 +83,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void consultarDatos() {
-        Retrofit retrofit = RetrofitClient.getClient(APIRestService.BASE_URL);
-        APIRestService ars = retrofit.create(APIRestService.class);
-        // TODO Obtener los datos con el resto de parámetros
-          /*Call<DatosCentro> call = ars.getData();
-      call.enqueue(new retrofit2.Callback<DatosCentro>() {
-            @Override
-            public void onResponse(Call<DatosCentro> call, retrofit2.Response<DatosCentro> response) {
-                if (response.isSuccessful()) {
-                    String datosCentro = response.body().toString();
-                    Toast.makeText(MainActivity.this, "Datos obtenidos correctamente", Toast.LENGTH_SHORT).show();
-                    System.out.println(datosCentro);
-                } else {
-                    Toast.makeText(MainActivity.this, "Error al obtener los datos", Toast.LENGTH_SHORT).show();
-                }
-            }
 
-            @Override
-            public void onFailure(Call<DatosCentro> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Error al obtener los datos", Toast.LENGTH_SHORT).show();
-            }
-        }); */
-
-
-    }
 
     public void onDatosListener(Double lat, Double lon, int dist) {
 
         this.lat = lat;
         this.lon = lon;
         this.dist = dist;
-        // Texto Harcodeado
-        tvFiltro.setText("Latitud: " + lat);
-        tvFiltro2.setText("Longitud: " + lon);
-        tvFiltro3.setText("Distancia: " + dist);
+
+        tvFiltro.setText(getString(R.string.latitud, lat));
+        tvFiltro2.setText(getString(R.string.longitud, lon));
+        tvFiltro3.setText(getString(R.string.distancia, dist));
+
     }
 
 
