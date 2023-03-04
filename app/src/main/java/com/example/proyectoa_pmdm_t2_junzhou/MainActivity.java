@@ -1,16 +1,20 @@
 package com.example.proyectoa_pmdm_t2_junzhou;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.proyectoa_pmdm_t2_junzhou.fragment.CentrosAdapter;
 import com.example.proyectoa_pmdm_t2_junzhou.fragment.ListadoFragment;
 import com.example.proyectoa_pmdm_t2_junzhou.retrofidata.CentrosRes;
 import com.example.proyectoa_pmdm_t2_junzhou.retrofitutils.APIRestService;
@@ -32,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Double lon;
     int dist;
     OnDatosListener listener;
+
     private FragmentManager fragmentManager;
 
     @Override
@@ -50,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btnConsultar.setOnClickListener((View.OnClickListener) this);
         btnFiltro.setOnClickListener((View.OnClickListener) this);
+
 
         initRetrofit();
 
@@ -80,6 +86,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             FilterDialog fd = new FilterDialog();
             fd.show(getSupportFragmentManager(), "Filtro");
 
+        }
+    }
+
+
+    public void onItemClick(int position) {
+        Intent intent = new Intent(this, DetalleActivity.class);
+        intent.putExtra("position", position);
+        startActivity(intent);
+
+    }
+
+    // TODO Función de cada vista
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_listado:
+                Toast.makeText(this, "Opción 1 pulsada", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.menu_mapa:
+                Toast.makeText(this, "Opción 2 pulsada", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 

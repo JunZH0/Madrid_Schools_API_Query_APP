@@ -1,5 +1,6 @@
 package com.example.proyectoa_pmdm_t2_junzhou.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.proyectoa_pmdm_t2_junzhou.DetalleActivity;
 import com.example.proyectoa_pmdm_t2_junzhou.R;
 import com.example.proyectoa_pmdm_t2_junzhou.retrofidata.CentrosRes;
 import com.example.proyectoa_pmdm_t2_junzhou.retrofidata.Graph;
@@ -25,7 +27,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 
-public class ListadoFragment extends Fragment {
+public class ListadoFragment extends Fragment{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -42,7 +44,7 @@ public class ListadoFragment extends Fragment {
     private String mParam2;
 
     public ListadoFragment() {
-        // Required empty public constructor
+
     }
 
 
@@ -73,6 +75,7 @@ public class ListadoFragment extends Fragment {
         adapter = new CentrosAdapter(centrosList);
         recyclerView.setAdapter(adapter);
 
+
         // Inicializar la instacia de Retrofit
         Retrofit retrofit = RetrofitClient.getClient(APIRestService.BASE_URL);
         APIRestService ars = retrofit.create(APIRestService.class);
@@ -82,10 +85,13 @@ public class ListadoFragment extends Fragment {
             public void onResponse(Call<CentrosRes> call, Response<CentrosRes> response) {
                 if (response.isSuccessful()) {
                    CentrosRes centrosRes = response.body();
-                   // Agregar los datos al ArrayList de centros
                    centrosList.addAll(centrosRes.getGraph());
                    cargarRV(centrosList);
-
+                   if (centrosList.size() > 0) {
+                       Toast.makeText(getActivity(), "Datos obtenidos", Toast.LENGTH_SHORT).show();
+                   } else {
+                       Toast.makeText(getActivity(), "No hay datos", Toast.LENGTH_SHORT).show();
+                   }
 
                 } else {
                     Toast.makeText(getActivity(), "Error al obtener los datos", Toast.LENGTH_SHORT).show();
@@ -100,6 +106,8 @@ public class ListadoFragment extends Fragment {
         return view;
     }
 
+
+
     private void cargarRV(ArrayList<Graph> results) {
         llm = new LinearLayoutManager(getActivity());
         adapter = new CentrosAdapter((ArrayList<Graph>) results);
@@ -108,4 +116,6 @@ public class ListadoFragment extends Fragment {
         recyclerView.setLayoutManager(llm);
         recyclerView.setAdapter(adapter);
     }
+
+
 }
