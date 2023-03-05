@@ -48,9 +48,14 @@ public class FilterDialog extends DialogFragment {
                     String dist = etDist.getText().toString();
 
                     if (lat.isEmpty() || lon.isEmpty() || dist.isEmpty()) {
-
                         Toast.makeText(getActivity(), "No puede haber campos vacíos", Toast.LENGTH_SHORT).show();
-                    } else {
+                    } else if (
+                            // Comprobamos que los campos sean números
+                            !lat.matches("[-+]?[0-9]*\\.?[0-9]+") ||
+                                    !lon.matches("[-+]?[0-9]*\\.?[0-9]+")) {
+                        Toast.makeText(getActivity(), "Los campos deben ser números", Toast.LENGTH_SHORT).show();
+
+                    }else {
 
                         if (listener != null) {
                             listener.onDatosListener(Double.parseDouble(lat), Double.parseDouble(lon), Integer.parseInt(dist));

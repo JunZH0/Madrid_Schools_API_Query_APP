@@ -1,14 +1,15 @@
 package com.example.proyectoa_pmdm_t2_junzhou.fragment;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.proyectoa_pmdm_t2_junzhou.DetalleActivity;
 import com.example.proyectoa_pmdm_t2_junzhou.R;
 import com.example.proyectoa_pmdm_t2_junzhou.retrofidata.Graph;
 
@@ -43,7 +44,10 @@ public class CentrosAdapter extends RecyclerView.Adapter<CentrosAdapter.CentroVi
        holder.getTvNombre().setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
-               Toast.makeText(view.getContext(), "Click en " + graph.getTitle(), Toast.LENGTH_SHORT).show();
+               Intent intent = new Intent(view.getContext(), DetalleActivity.class);
+
+                view.getContext().startActivity(intent);
+
            }
        });
     }

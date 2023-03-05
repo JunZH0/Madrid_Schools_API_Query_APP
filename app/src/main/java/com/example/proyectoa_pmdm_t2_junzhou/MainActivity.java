@@ -2,6 +2,7 @@ package com.example.proyectoa_pmdm_t2_junzhou;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -23,7 +24,7 @@ import com.example.proyectoa_pmdm_t2_junzhou.retrofitutils.RetrofitClient;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, OnDatosListener{
+public class MainActivity extends AppCompatActivity implements OnDatosListener{
 
     TextView tvTitulo;
     TextView tvFiltro;
@@ -53,19 +54,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         fragmentManager = getSupportFragmentManager();
 
-        btnConsultar.setOnClickListener((View.OnClickListener) this);
-        btnFiltro.setOnClickListener((View.OnClickListener) this);
+        btnConsultar.setOnClickListener(view -> {
+            ListadoFragment lf = new ListadoFragment();
+            cargarFragment(lf);
+            lf.actualizarLista(initRetrofit());
+        });
+        btnFiltro.setOnClickListener(view -> {
+            FilterDialog fd = new FilterDialog();
+            fd.show(getSupportFragmentManager(), "Filtro");
+        });
 
-
-        initRetrofit();
 
     }
 
-    private void initRetrofit() {
-        Retrofit retrofit = RetrofitClient.getClient(APIRestService.BASE_URL);
-        APIRestService ars = retrofit.create(APIRestService.class);
-
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -73,43 +74,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return true;
     }
 
-    public void onClick(View v) {
-        if (v.getId() == R.id.btn_consulta) {
 
-            ListadoFragment lf = new ListadoFragment();
-            FragmentTransaction ft = fragmentManager.beginTransaction();
-            ft.replace(R.id.frameLayout, lf);
-            ft.addToBackStack(null);
-            ft.commit();
-
-        } else if (v.getId() == R.id.btn_filtro) {
-            FilterDialog fd = new FilterDialog();
-            fd.show(getSupportFragmentManager(), "Filtro");
-
-        }
+    private void cargarFragment(Fragment fr) {
+        FragmentTransaction ft = fragmentManager.beginTransaction();
+        ft.replace(R.id.frameLayout, fr);
+        ft.addToBackStack(null);
+        ft.commit();
     }
 
 
-    public void onItemClick(int position) {
-        Intent intent = new Intent(this, DetalleActivity.class);
-        intent.putExtra("position", position);
-        startActivity(intent);
-
-    }
-
-    // TODO Función de cada vista
+    // TODO Función de cada vista del menu
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_listado:
-                Toast.makeText(this, "Opción 1 pulsada", Toast.LENGTH_SHORT).show();
-                return true;
+                btnConsultar.setText(R.string.consultar_listado);
+                ListadoFragment lf = new ListadoFragment();
+                cargarFragment(lf);
+                btnConsultar.setOnClickListener(view -> {
+                    lf.actualizarLista(initRetrofit());
+                });
+                break;
             case R.id.menu_mapa:
                 Toast.makeText(this, "Opción 2 pulsada", Toast.LENGTH_SHORT).show();
-                return true;
+                break; // add break statement here
             default:
                 return super.onOptionsItemSelected(item);
         }
+        return true;
+    }
+
+
+    public APIRestService initRetrofit() {
+        // Inicializar la instacia de Retrofit
+        Retrofit retrofit = RetrofitClient.getClient(APIRestService.BASE_URL);
+        APIRestService ars = retrofit.create(APIRestService.class);
+
+        return ars;
     }
 
 

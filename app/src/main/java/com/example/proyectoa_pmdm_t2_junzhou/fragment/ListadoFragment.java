@@ -1,6 +1,5 @@
 package com.example.proyectoa_pmdm_t2_junzhou.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.proyectoa_pmdm_t2_junzhou.DetalleActivity;
 import com.example.proyectoa_pmdm_t2_junzhou.R;
 import com.example.proyectoa_pmdm_t2_junzhou.retrofidata.CentrosRes;
 import com.example.proyectoa_pmdm_t2_junzhou.retrofidata.Graph;
@@ -31,31 +29,24 @@ public class ListadoFragment extends Fragment{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
     private RecyclerView recyclerView;
     private CentrosAdapter adapter;
     private ArrayList<Graph> centrosList;
     LinearLayoutManager llm;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     public ListadoFragment() {
 
     }
 
 
-    public static ListadoFragment newInstance(String param1, String param2) {
+    public static ListadoFragment newInstance() {
         ListadoFragment fragment = new ListadoFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
+
 
     public View onCreate(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,22 +67,23 @@ public class ListadoFragment extends Fragment{
         recyclerView.setAdapter(adapter);
 
 
-        // Inicializar la instacia de Retrofit
-        Retrofit retrofit = RetrofitClient.getClient(APIRestService.BASE_URL);
-        APIRestService ars = retrofit.create(APIRestService.class);
+        return view;
+    }
+
+    public void actualizarLista(APIRestService ars) {
         Call<CentrosRes> call = ars.getData();
         call.enqueue(new Callback<CentrosRes>() {
             @Override
             public void onResponse(Call<CentrosRes> call, Response<CentrosRes> response) {
                 if (response.isSuccessful()) {
-                   CentrosRes centrosRes = response.body();
-                   centrosList.addAll(centrosRes.getGraph());
-                   cargarRV(centrosList);
-                   if (centrosList.size() > 0) {
-                       Toast.makeText(getActivity(), "Datos obtenidos", Toast.LENGTH_SHORT).show();
-                   } else {
-                       Toast.makeText(getActivity(), "No hay datos", Toast.LENGTH_SHORT).show();
-                   }
+                    CentrosRes centrosRes = response.body();
+                    centrosList.addAll(centrosRes.getGraph());
+                    cargarRV(centrosList);
+                    if (centrosList.size() > 0) {
+                        Toast.makeText(getActivity(), "Datos obtenidos", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getActivity(), "No hay datos", Toast.LENGTH_SHORT).show();
+                    }
 
                 } else {
                     Toast.makeText(getActivity(), "Error al obtener los datos", Toast.LENGTH_SHORT).show();
@@ -102,9 +94,9 @@ public class ListadoFragment extends Fragment{
                 Toast.makeText(getActivity(), "Error al obtener los datos", Toast.LENGTH_SHORT).show();
             }
         });
-
-        return view;
     }
+
+
 
 
 

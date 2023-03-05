@@ -13,5 +13,8 @@
     <string name="longitud">Longitud: </string>
     <string name="distancia">Distancia: </string>
     <string name="filtro">%1$s: %2$s</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="consultar_listado">Consultar Listado</string>
 
 </resources>
