@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.proyectoa_pmdm_t2_junzhou.fragment.CentrosAdapter;
 import com.example.proyectoa_pmdm_t2_junzhou.fragment.ListadoFragment;
+import com.example.proyectoa_pmdm_t2_junzhou.fragment.MapaFragment;
 import com.example.proyectoa_pmdm_t2_junzhou.retrofidata.CentrosRes;
 import com.example.proyectoa_pmdm_t2_junzhou.retrofitutils.APIRestService;
 import com.example.proyectoa_pmdm_t2_junzhou.retrofitutils.RetrofitClient;
@@ -107,7 +108,9 @@ public class MainActivity extends AppCompatActivity implements OnDatosListener{
                 });
                 break;
             case R.id.menu_mapa:
-                Toast.makeText(this, "Opción 2 pulsada", Toast.LENGTH_SHORT).show();
+                Fragment fr = new MapaFragment();
+                cargarFragment(fr);
+
                 break; // add break statement here
             default:
                 return super.onOptionsItemSelected(item);
