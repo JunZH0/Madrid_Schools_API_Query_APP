@@ -105,11 +105,31 @@ public class MainActivity extends AppCompatActivity implements OnDatosListener{
                 APIRestService ars = initRetrofit();
                 btnConsultar.setOnClickListener(view -> {
                     lf.actualizarLista(ars , lat, lon, dist);
+                    lat = null;
+                    lon = null;
+                    dist = 0;
+                    tvFiltro.setText("");
+                    tvFiltro2.setText("");
+                    tvFiltro3.setText("");
                 });
+
                 break;
             case R.id.menu_mapa:
+                btnConsultar.setText(R.string.consultar_mapa);
                 Fragment fr = new MapaFragment();
                 cargarFragment(fr);
+                APIRestService ars2 = initRetrofit();
+                btnConsultar.setOnClickListener(view -> {
+                    MapaFragment mf = (MapaFragment) fr;
+                    mf.actualizarMapa(ars2 , lat, lon, dist);
+                    lat = null;
+                    lon = null;
+                    dist = 0;
+                    tvFiltro.setText("");
+                    tvFiltro2.setText("");
+                    tvFiltro3.setText("");
+                });
+
 
                 break; // add break statement here
             default:

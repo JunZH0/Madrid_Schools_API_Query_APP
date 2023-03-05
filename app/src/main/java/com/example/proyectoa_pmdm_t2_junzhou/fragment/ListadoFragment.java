@@ -87,8 +87,7 @@ public class ListadoFragment extends Fragment{
                     cargarRV(centrosList);
                     if (centrosList.size() > 0) {
                         Toast.makeText(getActivity(), "Datos obtenidos", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(getActivity(), "No hay datos", Toast.LENGTH_SHORT).show();
+                    } else {Toast.makeText(getActivity(), "No hay datos", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Toast.makeText(getActivity(), "Error al obtener los datos", Toast.LENGTH_SHORT).show();
