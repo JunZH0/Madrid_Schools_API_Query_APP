@@ -20,8 +20,8 @@ public interface APIRestService {
     @GET("203166-0-universidades-educacion.json")
     Call<CentrosRes> getData();
 
-    @GET("tipo/entidadesyorganismos/{id_url}")
-    Call<CentrosRes> getData(@Path("id_url") String url);
+    @GET("tipo/entidadesyorganismos/{centro}")
+    Call<CentrosRes> getDataCenter(@Path("centro") String url);
 
 
 }

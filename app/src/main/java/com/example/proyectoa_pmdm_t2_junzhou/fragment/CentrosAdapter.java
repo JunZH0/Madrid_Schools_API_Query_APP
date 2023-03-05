@@ -44,10 +44,12 @@ public class CentrosAdapter extends RecyclerView.Adapter<CentrosAdapter.CentroVi
        holder.getTvNombre().setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
+               // recoge el id del centro y con el substring lo recorta para que solo quede el id despues del ultimo /
+               String url = graph.getId();
+               String id = url.substring(url.lastIndexOf('/') + 1);
                Intent intent = new Intent(view.getContext(), DetalleActivity.class);
-
-                view.getContext().startActivity(intent);
-
+               intent.putExtra("id", id);
+               view.getContext().startActivity(intent);
            }
        });
     }
