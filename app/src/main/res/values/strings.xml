@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">Centros Educativos Madrid</string>
+    <string name="detalles_name">Detalles del centro</string>
     <string name="str_listado">Listado</string>
     <string name="str_mapa">Mapa</string>
-    <string name="strTitulo">Buscador de Escuelas de La Comunidad de Madrid</string>
+    <string name="strTitulo">Buscador de centros educativos de la Comunidad de Madrid</string>
     <string name="strBtnFiltro">SELECCIONAR FILTRO</string>
     <string name="strBtnConsulta">CONSULTAR LISTADO</string>
     <string name="strPlaceholder">Placeholder</string>
