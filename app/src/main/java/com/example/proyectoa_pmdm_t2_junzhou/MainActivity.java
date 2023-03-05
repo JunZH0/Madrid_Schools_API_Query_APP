@@ -54,10 +54,20 @@ public class MainActivity extends AppCompatActivity implements OnDatosListener{
 
         fragmentManager = getSupportFragmentManager();
 
+
         btnConsultar.setOnClickListener(view -> {
             ListadoFragment lf = new ListadoFragment();
             cargarFragment(lf);
-            lf.actualizarLista(initRetrofit());
+            APIRestService ars = initRetrofit();
+            lf.actualizarLista(ars , lat, lon, dist);
+            // borrar los filtros
+            lat = null;
+            lon = null;
+            dist = 0;
+            tvFiltro.setText("");
+            tvFiltro2.setText("");
+            tvFiltro3.setText("");
+
         });
         btnFiltro.setOnClickListener(view -> {
             FilterDialog fd = new FilterDialog();
@@ -91,8 +101,9 @@ public class MainActivity extends AppCompatActivity implements OnDatosListener{
                 btnConsultar.setText(R.string.consultar_listado);
                 ListadoFragment lf = new ListadoFragment();
                 cargarFragment(lf);
+                APIRestService ars = initRetrofit();
                 btnConsultar.setOnClickListener(view -> {
-                    lf.actualizarLista(initRetrofit());
+                    lf.actualizarLista(ars , lat, lon, dist);
                 });
                 break;
             case R.id.menu_mapa:

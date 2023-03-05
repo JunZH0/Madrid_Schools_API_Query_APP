@@ -70,11 +70,18 @@ public class ListadoFragment extends Fragment{
         return view;
     }
 
-    public void actualizarLista(APIRestService ars) {
-        Call<CentrosRes> call = ars.getData();
+    public void actualizarLista(APIRestService ars, Double lat, Double lon, int dist) {
+        Call<CentrosRes> call;
+
+        if (lat != null && lon != null && dist > 0) {
+            call = ars.getDataFilter(lat, lon, dist);
+        } else {
+            call = ars.getData();
+        }
         call.enqueue(new Callback<CentrosRes>() {
             @Override
             public void onResponse(Call<CentrosRes> call, Response<CentrosRes> response) {
+
                 if (response.isSuccessful()) {
                     CentrosRes centrosRes = response.body();
                     centrosList.addAll(centrosRes.getGraph());
@@ -84,7 +91,6 @@ public class ListadoFragment extends Fragment{
                     } else {
                         Toast.makeText(getActivity(), "No hay datos", Toast.LENGTH_SHORT).show();
                     }
-
                 } else {
                     Toast.makeText(getActivity(), "Error al obtener los datos", Toast.LENGTH_SHORT).show();
                 }
