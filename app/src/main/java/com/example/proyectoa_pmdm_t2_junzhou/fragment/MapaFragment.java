@@ -29,11 +29,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MapaFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class MapaFragment extends Fragment {
 
     protected SupportMapFragment mapa;
@@ -112,6 +107,7 @@ public class MapaFragment extends Fragment {
             LatLngBounds.Builder builder = new LatLngBounds.Builder();
             LatLng latLn = null;
             if (centrosList != null) {
+                // Itera sobre la lista de centros y los añade al mapa
                 for (int i = 0; i < centrosList.size(); i++) {
                     latLn = new LatLng(centrosList.get(i).getLocation().getLatitude(), centrosList.get(i).getLocation().getLongitude());
                     googleMap.addMarker(new MarkerOptions().position(latLn).title(centrosList.get(i).getTitle()));

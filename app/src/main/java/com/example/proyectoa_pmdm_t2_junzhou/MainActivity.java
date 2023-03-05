@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements OnDatosListener{
     Double lat;
     Double lon;
     int dist;
-    OnDatosListener listener;
 
     private FragmentManager fragmentManager;
 
@@ -61,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements OnDatosListener{
             cargarFragment(lf);
             APIRestService ars = initRetrofit();
             lf.actualizarLista(ars , lat, lon, dist);
-            // reseteea el filtro anterior
+            // resetea el filtro anterior
             lat = null;
             lon = null;
             dist = 0;
@@ -73,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements OnDatosListener{
         btnFiltro.setOnClickListener(view -> {
             FilterDialog fd = new FilterDialog();
             fd.show(getSupportFragmentManager(), "Filtro");
+
         });
 
 
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements OnDatosListener{
     }
 
 
-    // TODO Función de cada vista del menu
+    // Función de cada vista del menu
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {

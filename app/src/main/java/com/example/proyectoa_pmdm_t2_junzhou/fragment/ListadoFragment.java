@@ -27,9 +27,6 @@ import retrofit2.Retrofit;
 
 public class ListadoFragment extends Fragment{
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-
     private RecyclerView recyclerView;
     private CentrosAdapter adapter;
     private ArrayList<Graph> centrosList;
