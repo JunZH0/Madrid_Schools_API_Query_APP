@@ -40,7 +40,6 @@ public class DetalleActivity extends AppCompatActivity {
 
         ApiCall();
 
-
     }
 
     private void ApiCall() {
