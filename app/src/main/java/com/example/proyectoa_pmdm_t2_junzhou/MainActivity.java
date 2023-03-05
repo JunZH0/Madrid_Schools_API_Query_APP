@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements OnDatosListener{
             cargarFragment(lf);
             APIRestService ars = initRetrofit();
             lf.actualizarLista(ars , lat, lon, dist);
-            // borrar los filtros
+            // reseteea el filtro anterior
             lat = null;
             lon = null;
             dist = 0;

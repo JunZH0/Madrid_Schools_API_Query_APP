@@ -81,7 +81,6 @@ public class ListadoFragment extends Fragment{
         call.enqueue(new Callback<CentrosRes>() {
             @Override
             public void onResponse(Call<CentrosRes> call, Response<CentrosRes> response) {
-
                 if (response.isSuccessful()) {
                     CentrosRes centrosRes = response.body();
                     centrosList.addAll(centrosRes.getGraph());
